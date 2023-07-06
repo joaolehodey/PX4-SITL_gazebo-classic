@@ -1,0 +1,373 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+    <model name="Glassy">
+        <!-- BASE PLATFORM LINK -->
+
+    <pose>0 0 0.246 0 0 0</pose>
+
+
+      <link name="platform">
+      <pose>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose> 0 0 -0.04 0 0 0</pose>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>10.79825</iyy>
+          <iyz>0</iyz>
+          <izz>10.18078</izz>
+        </inertia>
+      </inertial>
+      <collision name='platform_collision'>
+        <pose>0 -0.11101 0.021 0 0 1.5707</pose>
+        <geometry>
+          <box>
+            <size>0.399 1.33 0.177</size>
+          </box>
+        </geometry>
+      </collision>
+        <visual name='platform_visual'>
+            <pose>0 0 0 0 0 1.5707</pose>
+            <geometry>
+            <scale>1 1 1</scale>
+            <mesh>
+                <scale>1 1 1</scale>
+                <uri>model://glassy/meshes/glassy.dae</uri>
+            </mesh>
+            </geometry>
+        <material>
+        <script>
+            <name>Gazebo/Green</name>
+            <uri>__default__</uri>
+        </script>
+        </material>
+        </visual>
+        </link>
+
+
+      <!-- PROPELLER LINK -->
+
+    <link name='propeller_link'>
+      <pose>-0.52144 0 -0.035202 0 1.5707 0 </pose>
+      <!-- <pose>-0.52144 0 -0.035202 0 0 0 </pose> -->
+      <!-- <pose>-0.52144 0 0 0 0 1.5707 </pose> -->
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.000005</mass>
+        <inertia>
+          <ixx>9.75e-10</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000000273104</iyy>
+          <iyz>0</iyz>
+          <izz>0.000000274004</izz>
+        </inertia>
+      </inertial>
+
+      <collision name='propeller_colision'>
+        <pose>-0.2 0 0 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.018</length>
+            <radius>0.024</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name='propeller_link_visual'>
+        <pose> 0 0 0 0 -1.5707 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.1 0.1 0.1</scale>
+            <uri>model://glassy/meshes/propeller.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <velocity_decay/>
+      <self_collide>0</self_collide>
+    </link>
+
+    <joint name='propeller_joint' type='revolute'>
+      <parent>platform</parent>
+      <child>propeller_link</child>
+      <use_parent_model_frame>1</use_parent_model_frame>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+      </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+        </ode>
+      </physics>
+    </joint>
+
+
+
+
+      <!-- RUDDER LINK  -->
+    <link name="rudder_link">
+        <inertial>
+        <mass>0.00000001</mass>
+        <inertia>
+          <ixx>0.000001</ixx>
+          <ixy>0.0</ixy>
+          <iyy>0.000001</iyy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+          <izz>0.000001</izz>
+        </inertia>
+        <pose> -0.54216 0.0 0.007125 0.0 0 0 0 </pose>
+      </inertial>
+      <visual name='rudder_visual'>
+        <pose>-0.54216 -0.064324 0.007125 0 0 1.5707</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://glassy/meshes/rudder.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Blue</name>
+            <uri>__default__</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+
+
+
+    <joint name='rudder_joint' type='revolute'>
+      <parent>platform</parent>
+      <child>rudder_link</child>
+      <pose>-0.54216 -0.064324 0.007125 0.00 0 0.0</pose>
+      <use_parent_model_frame>1</use_parent_model_frame>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <!-- -30/+30 deg. -->
+          <lower>-0.53</lower>
+          <upper>0.53</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000</damping>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+        </ode>
+      </physics>
+    </joint>
+
+
+    <!-- IMU -->
+
+    <link name='glassy/imu_link'>
+      <pose>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.015</mass>
+        <inertia>
+          <ixx>1e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-05</iyy>
+          <iyz>0</iyz>
+          <izz>1e-05</izz>
+        </inertia>
+      </inertial>
+    </link>
+    <joint name='glassy/imu_joint' type='revolute'>
+      <child>glassy/imu_link</child>
+      <parent>platform</parent>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+
+    <include>
+      <uri>model://gps</uri>
+      <pose>0 0 0.10 0 0 0</pose>
+      <name>gps</name>
+    </include>
+    <joint name='gps_joint' type='fixed'>
+      <child>gps::link</child>
+      <parent>platform</parent>
+    </joint>
+
+
+  <!-- PLUGINS -->
+
+      <plugin name='gazebo_imu_plugin' filename='libgazebo_imu_plugin.so'>
+        <robotNamespace></robotNamespace>
+        <linkName>glassy/imu_link</linkName>
+        <imuTopic>/imu</imuTopic>
+        <gyroscopeNoiseDensity>0.0003394</gyroscopeNoiseDensity>
+        <gyroscopeRandomWalk>3.8785e-05</gyroscopeRandomWalk>
+        <gyroscopeBiasCorrelationTime>1000.0</gyroscopeBiasCorrelationTime>
+        <gyroscopeTurnOnBiasSigma>0.0087</gyroscopeTurnOnBiasSigma>
+        <accelerometerNoiseDensity>0.004</accelerometerNoiseDensity>
+        <accelerometerRandomWalk>0.006</accelerometerRandomWalk>
+        <accelerometerBiasCorrelationTime>300.0</accelerometerBiasCorrelationTime>
+        <accelerometerTurnOnBiasSigma>0.196</accelerometerTurnOnBiasSigma>
+      </plugin>
+
+      <plugin name='magnetometer_plugin' filename='libgazebo_magnetometer_plugin.so'>
+        <robotNamespace/>
+        <pubRate>100</pubRate>
+        <noiseDensity>0.0004</noiseDensity>
+        <randomWalk>6.4e-06</randomWalk>
+        <biasCorrelationTime>600</biasCorrelationTime>
+        <magTopic>/mag</magTopic>
+      </plugin>
+
+      <plugin name='barometer_plugin' filename='libgazebo_barometer_plugin.so'>
+        <robotNamespace/>
+        <pubRate>50</pubRate>
+        <baroTopic>/baro</baroTopic>
+      </plugin>
+      <static>0</static>
+
+
+    <plugin name='motor_model' filename='libgazebo_motor_model.so'>
+      <robotNamespace></robotNamespace>
+      <jointName>propeller_joint</jointName>
+      <linkName>propeller_link</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>1000</maxRotVelocity>
+      <motorConstant>3.0e-3</motorConstant>
+      <momentConstant>0.008</momentConstant>
+      <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+      <motorNumber>0</motorNumber>
+      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <motorSpeedPubTopic>/motor_speed/0</motorSpeedPubTopic>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+      <robotNamespace></robotNamespace>
+    </plugin>
+
+
+    <plugin name="rudder" filename="libLiftDragPlugin.so">
+      <a0>0.0</a0>
+      <cla>4.752798721</cla>
+      <cda>0.0</cda>
+      <cda_stall>0.0</cda_stall>
+      <cma>0.0</cma>
+      <cma_stall>0.0</cma_stall>
+      <alpha_stall>0.925</alpha_stall>
+      <cla_stall>-3.85</cla_stall>
+      <cp>-0.53 0 0 </cp>
+      <area>0.02</area>
+      <air_density>997.8</air_density>
+      <forward>1 0 0</forward>
+      <upward>0 1 0</upward>
+      <link_name>platform</link_name>
+      <control_joint_name>
+         rudder_joint
+      </control_joint_name>
+      <control_joint_rad_to_cl>0.8</control_joint_rad_to_cl>
+      <robotNamespace></robotNamespace>
+    </plugin>
+
+        <!-- <air_density>1000</air_density>
+    <cla>4.13</cla>
+    <cla_stall>-1.1</cla_stall>
+    <cda>0.2</cda>
+    <cda_stall>0.03</cda_stall>
+    <alpha_stall>0.17</alpha_stall>
+    <a0>0</a0>
+    <area>0.0244</area>
+    <upward>0 1 0</upward>
+    <forward>1 0 0</forward>
+    <link_name>rudder</link_name>
+    <cp>0 0 0</cp> -->
+
+
+
+
+    <plugin name='usv_dynamics_plugin' filename='libgazebo_usv_dynamics_plugin.so'>
+      <bodyName>platform</bodyName>
+      <waterLevel>0</waterLevel>
+      <waterDensity>997.8</waterDensity>
+      <xDotU>0.0</xDotU>
+      <yDotV>0.0</yDotV>
+      <nDotR>0.0</nDotR>
+      <xU>0.3</xU>
+      <xUU>0.4</xUU>
+      <yV>4.0</yV>
+      <yVV>0.0</yVV>
+      <zW>10.0</zW>
+      <kP>5.0</kP>
+      <mQ>0.5</mQ>
+      <nR>0.5</nR>
+      <nRR>0.0</nRR>
+      <hullRadius>0.513</hullRadius>
+      <boatWidth>0.4</boatWidth>
+      <length_n>2</length_n>
+      <boatLength>1.33</boatLength>
+    </plugin>
+
+    <plugin name='mavlink_interface' filename='libgazebo_mavlink_interface.so'>
+      <robotNamespace></robotNamespace>
+      <imuSubTopic>/imu</imuSubTopic>
+      <magSubTopic>/mag</magSubTopic>
+      <baroSubTopic>/baro</baroSubTopic>
+      <mavlink_addr>INADDR_ANY</mavlink_addr>
+      <mavlink_tcp_port>{{ mavlink_tcp_port }}</mavlink_tcp_port>
+      <mavlink_udp_port>{{ mavlink_udp_port }}</mavlink_udp_port>
+      <serialEnabled>0</serialEnabled>
+      <serialDevice>/dev/ttyACM0</serialDevice>
+      <baudRate>921600</baudRate>
+      <qgc_addr>INADDR_ANY</qgc_addr>
+      <qgc_udp_port>14550</qgc_udp_port>
+      <sdk_addr>INADDR_ANY</sdk_addr>
+      <sdk_udp_port>14540</sdk_udp_port>
+      <hil_mode>false</hil_mode>
+      <hil_state_level>false</hil_state_level>
+      <enable_lockstep>true</enable_lockstep>
+      <use_tcp>true</use_tcp>
+      <motorSpeedCommandPubTopic>/gazebo/command/motor_speed</motorSpeedCommandPubTopic>
+      <control_channels>
+        <channel name="rotor">
+          <input_index>0</input_index>
+          <input_offset>0</input_offset>
+          <input_scaling>100</input_scaling>
+          <zero_position_disarmed>0</zero_position_disarmed>
+          <zero_position_armed>0</zero_position_armed>
+          <joint_control_type>velocity</joint_control_type>
+          <!-- <joint_name>propeller_joint</joint_name> -->
+        </channel>
+        <channel name="rudder">
+          <input_index>1</input_index>
+          <input_offset>0</input_offset>
+          <input_scaling>1</input_scaling>
+          <zero_position_disarmed>0</zero_position_disarmed>
+          <zero_position_armed>0</zero_position_armed>
+          <joint_control_type>position_kinematic</joint_control_type>
+          <joint_name>rudder_joint</joint_name>
+        </channel>
+      </control_channels>
+    </plugin>
+  </model>
+</sdf>
