@@ -7,7 +7,7 @@
       <pose>0 0 0 0 0 0</pose>
       <inertial>
         <pose> 0 0 -0.005 0 0 0</pose>
-        <mass>1.50</mass>
+        <mass>1.0</mass>
         <inertia>
           <ixx>0.197563</ixx>
           <ixy>0.0</ixy>
@@ -288,40 +288,25 @@
       <bodyName>platform</bodyName>
       <waterLevel>0</waterLevel>
       <waterDensity>997.8</waterDensity>
-      <xDotU>0.1</xDotU>
-      <yDotV>0.1</yDotV>
-      <nDotR>0</nDotR>
-      <xU>0.3</xU>
-      <xUU>0.4</xUU>
-      <yV>4.0</yV>
-      <yVV>0.0</yVV>
+      <xDotU>0.0</xDotU>
+      <yDotV>0.0</yDotV>
+      <nDotR>0.0</nDotR>
+      <xU>0.6218</xU>
+      <xUU>0.0216</xUU>
+      <yV>4.44</yV>
+      <yVV>0.1937</yVV>
       <zW>10.0</zW>
       <kP>5.0</kP>
       <mQ>0.5</mQ>
-      <nR>1.2</nR>
-      <nRR>0.5</nRR>
+      <nR>0.8592</nR>
+      <nRR>0.0963</nRR>
       <hullRadius>0.513</hullRadius>
-      <boatWidth>0.4</boatWidth>
+      <boatWidth>0.26</boatWidth>
       <length_n>10</length_n>
-      <boatLength>1.33</boatLength>
+      <boatLength>0.85</boatLength>
 
     </plugin>
 
-    <!-- <plugin name="uuv_plugin" filename="libgazebo_uuv_plugin.so">
-        <robotNamespace />
-        <baseLinkName>platform</baseLinkName>
-        <addedMassLinear>0.1 0.3 0.3</addedMassLinear>
-        <addedMassAngular>0 0 0.1</addedMassAngular>
-        <dampingLinear>5.39 17.36 17.36</dampingLinear>
-        <dampingAngular>20 20  1.2</dampingAngular>
-        <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
-        <buoyancy>
-            <link_name>platform</link_name>
-            <origin>0 0 0</origin>
-            <compensation>2.5</compensation>
-            <height_scale_limit>0.05</height_scale_limit>
-        </buoyancy>
-    </plugin> -->
 
     <plugin name='mavlink_interface' filename='libgazebo_mavlink_interface.so'>
       <robotNamespace></robotNamespace>
