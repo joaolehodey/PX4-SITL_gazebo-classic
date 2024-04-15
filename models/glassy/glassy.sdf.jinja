@@ -249,26 +249,26 @@
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.0125</timeConstantDown>
-      <maxRotVelocity>1000</maxRotVelocity>
-      <motorConstant>3.0e-3</motorConstant>
+      <maxRotVelocity>1</maxRotVelocity>
+      <motorConstant>16.4</motorConstant>
       <momentConstant>0.00</momentConstant>
       <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
       <motorNumber>0</motorNumber>
       <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
       <rollingMomentCoefficient>0.0</rollingMomentCoefficient>
       <motorSpeedPubTopic>/motor_speed/0</motorSpeedPubTopic>
-      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+      <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
     </plugin>
 
 
     <plugin name="rudder" filename="libLiftDragPlugin.so">
       <a0>0.0</a0>
-      <cla>0.6000000</cla>
+      <cla>4.62</cla>
       <cda>0.0</cda>
       <cda_stall>0.0</cda_stall>
       <cma>0.0</cma>
       <cma_stall>0.0</cma_stall>
-      <alpha_stall>0.61</alpha_stall>
+      <alpha_stall>1.0</alpha_stall>
       <cla_stall>-3.85</cla_stall>
       <cp>-0.53 0 0 </cp>
       <area>0.001</area>
@@ -279,7 +279,7 @@
       <control_joint_name>
          rudder_joint
       </control_joint_name>
-      <control_joint_rad_to_cl>1.1</control_joint_rad_to_cl>
+      <!-- <control_joint_rad_to_cl>0.1</control_joint_rad_to_cl> -->
     </plugin>
 
 
@@ -338,7 +338,7 @@
         <channel name="rotor">
           <input_index>0</input_index>
           <input_offset>0</input_offset>
-          <input_scaling>100</input_scaling>
+          <input_scaling>1</input_scaling>
           <zero_position_disarmed>0</zero_position_disarmed>
           <zero_position_armed>0</zero_position_armed>
           <joint_control_type>velocity</joint_control_type>
